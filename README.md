@@ -6,7 +6,8 @@
 
 A production-ready machine learning system that predicts NBA player point totals and identifies positive expected value betting opportunities using **XGBoost with quantile regression**. This project demonstrates advanced feature engineering, rigorous backtesting, and profitable sports betting analytics.
 
-**What it showcases about me:** 
+**What it showcases about me:**
+
 This project is an end-to-end decision support analytics system designed to transform noisy, time-based performance data into clear, actionable insights. The goal is not just to produce point estimates, but to understand trends, anomalies, and uncertainty so decisions can be made with confidence. The system ingests raw data, applies rigorous validation and feature engineering, and generates interpretable outputs that highlight what has changed, why it matters, and how reliable the insight is. While the use case is NBA player performance, the analytical framework mirrors real-world business analytics problems where variability, imperfect data, and time-dependent patterns must be accounted for before insights can be trusted.
 
 ## 📚 Table of Contents

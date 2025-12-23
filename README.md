@@ -329,12 +329,7 @@ XGBOOST_PARAMS = {
    - Critical for accurate predictions
    - Recommended: NBA injury API or web scraping
 
-2. **Player Props API**: Requires paid subscription
-   - The Odds API player props cost $200-500/month
-   - Current version includes fallback to dummy data for testing
-   - Real betting requires live odds
-
-3. **Opponent Defense**: Using simplified league averages
+2. **Opponent Defense**: Using simplified league averages
    - Better: Position-specific defensive ratings
    - Requires additional data source or calculation
 

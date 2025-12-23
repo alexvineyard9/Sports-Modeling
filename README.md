@@ -432,11 +432,6 @@ The `is_starter` feature has been identified as a potential leakage source and h
 
 ### Installation Issues
 
-**"hoopR not installed"**
-```bash
-pip install hoopR
-```
-
 **"XGBoost GPU not available"**
 - Verify CUDA installation
 - Install GPU XGBoost: `pip install xgboost[gpu]`
@@ -493,7 +488,7 @@ python scripts/3_calculate_predictions.py --debug
 
 ## References
 
-- hoopR Documentation: https://hoopr.sportsdataverse.org/
+- nba_api Documentation: https://pypi.org/project/nba_api/1.1.5/
 - The Odds API: https://the-odds-api.com/
 - XGBoost Documentation: https://xgboost.readthedocs.io/
 - Kelly Criterion: https://en.wikipedia.org/wiki/Kelly_criterion

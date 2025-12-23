@@ -133,29 +133,6 @@ Critical architectural decisions to prevent data leakage:
 
 4. **Strict Train/Test Split**: Training ends at 2023-24 season, testing on 2024-25 (out-of-sample)
 
-## Quick Start
-
-### Requirements
-
-- Python 3.9 or higher
-- 8GB RAM minimum (16GB recommended)
-- NVIDIA GPU optional (10-20x faster training)
-- The Odds API key for real betting lines
-
-### Installation
-
-```bash
-# Clone repository
-git clone https://github.com/yourusername/nba-betting-model.git
-cd nba-betting-model
-
-# Install dependencies
-pip install -r requirements.txt
-
-# Configure settings (add your API key)
-# Edit config/config.py
-```
-
 ### Basic Usage
 
 ```bash

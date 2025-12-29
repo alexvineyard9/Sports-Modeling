@@ -1,0 +1,519 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NBA Player Props - 2025-12-17</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #0a1929;
+            color: #ffffff;
+            padding: 20px;
+        }
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: #0f2137;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+        }
+        .header {
+            background: linear-gradient(135deg, #1e3a5f 0%, #0f2137 100%);
+            padding: 25px;
+            text-align: center;
+            border-bottom: 3px solid #00d4ff;
+        }
+        .header h1 {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        .header .subtitle {
+            font-size: 14px;
+            color: #8ba3c7;
+        }
+        .stats-bar {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            background: #132a45;
+            border-bottom: 1px solid #1e3a5f;
+        }
+        .stat {
+            text-align: center;
+            padding: 15px;
+            border-right: 1px solid #1e3a5f;
+        }
+        .stat:last-child {
+            border-right: none;
+        }
+        .stat-label {
+            font-size: 11px;
+            color: #8ba3c7;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 5px;
+        }
+        .stat-value {
+            font-size: 24px;
+            font-weight: 700;
+            color: #00d4ff;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        thead {
+            background: #1e3a5f;
+            border-bottom: 2px solid #00d4ff;
+        }
+        th {
+            padding: 12px 10px;
+            text-align: left;
+            font-weight: 600;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: #ffffff;
+        }
+        th.number {
+            text-align: center;
+        }
+        td {
+            padding: 14px 10px;
+            border-bottom: 1px solid #1e3a5f;
+            font-size: 13px;
+        }
+        tbody tr {
+            background: #132a45;
+        }
+        tbody tr:nth-child(even) {
+            background: #0f2137;
+        }
+        tbody tr:hover {
+            background: #1e3a5f;
+        }
+        .player-cell {
+            font-weight: 600;
+            color: #ffffff;
+            font-size: 14px;
+        }
+        .team-cell {
+            font-size: 12px;
+            color: #8ba3c7;
+            text-align: center;
+        }
+        .number {
+            text-align: center;
+            font-family: 'Consolas', 'Monaco', monospace;
+            font-weight: 600;
+            font-size: 13px;
+        }
+        .line-odds {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2px;
+        }
+        .line-value {
+            font-size: 15px;
+            font-weight: 700;
+            color: #00d4ff;
+        }
+        .odds-value {
+            font-size: 11px;
+            color: #8ba3c7;
+        }
+        .pred-value {
+            font-weight: 700;
+            color: #ffffff;
+        }
+        .edge-positive {
+            color: #4ade80;
+            font-weight: 700;
+        }
+        .edge-high {
+            color: #22c55e;
+            font-weight: 700;
+        }
+        .edge-medium {
+            color: #fbbf24;
+            font-weight: 700;
+        }
+        .pick-over {
+            background: #22c55e;
+            color: white;
+            padding: 6px 12px;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: 700;
+            text-align: center;
+            display: inline-block;
+        }
+        .pick-under {
+            background: #ef4444;
+            color: white;
+            padding: 6px 12px;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: 700;
+            text-align: center;
+            display: inline-block;
+        }
+        .footer {
+            padding: 15px;
+            text-align: center;
+            background: #0a1929;
+            color: #8ba3c7;
+            font-size: 11px;
+            border-top: 1px solid #1e3a5f;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>NBA PLAYER PROPS MODEL</h1>
+            <div class="subtitle">Wednesday, December 17, 2025</div>
+        </div>
+        
+        <div class="stats-bar">
+            <div class="stat">
+                <div class="stat-label">Total Picks</div>
+                <div class="stat-value">18</div>
+            </div>
+            <div class="stat">
+                <div class="stat-label">Avg Edge</div>
+                <div class="stat-value">4.3</div>
+            </div>
+            <div class="stat">
+                <div class="stat-label">Over</div>
+                <div class="stat-value">11</div>
+            </div>
+            <div class="stat">
+                <div class="stat-label">Under</div>
+                <div class="stat-value">7</div>
+            </div>
+        </div>
+        
+        <table>
+            <thead>
+                <tr>
+                    <th>Player</th>
+                    <th class="number">Team</th>
+                    <th class="number">Opp</th>
+                    <th class="number">Line / Odds</th>
+                    <th class="number">Pred</th>
+                    <th class="number">Edge</th>
+                    <th class="number">Pick</th>
+                    <th class="number">Time</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                <tr>
+                    <td class="player-cell">Donovan Mitchell</td>
+                    <td class="team-cell">CLE</td>
+                    <td class="team-cell">CHI</td>
+                    <td class="number">
+                        <div class="line-odds">
+                            <span class="line-value">31.5</span>
+                            <span class="odds-value">-118</span>
+                        </div>
+                    </td>
+                    <td class="number pred-value">14.3</td>
+                    <td class="number edge-high">+17.2</td>
+                    <td class="number"><span class="pick-under">UNDER</span></td>
+                    <td class="team-cell">08:10 PM ET</td>
+                </tr>
+
+                <tr>
+                    <td class="player-cell">Dean Wade</td>
+                    <td class="team-cell">CLE</td>
+                    <td class="team-cell">CHI</td>
+                    <td class="number">
+                        <div class="line-odds">
+                            <span class="line-value">6.5</span>
+                            <span class="odds-value">+105</span>
+                        </div>
+                    </td>
+                    <td class="number pred-value">10.3</td>
+                    <td class="number edge-medium">+3.8</td>
+                    <td class="number"><span class="pick-over">OVER</span></td>
+                    <td class="team-cell">08:10 PM ET</td>
+                </tr>
+
+                <tr>
+                    <td class="player-cell">Lonzo Ball</td>
+                    <td class="team-cell">CLE</td>
+                    <td class="team-cell">CHI</td>
+                    <td class="number">
+                        <div class="line-odds">
+                            <span class="line-value">6.5</span>
+                            <span class="odds-value">+102</span>
+                        </div>
+                    </td>
+                    <td class="number pred-value">9.9</td>
+                    <td class="number edge-medium">+3.4</td>
+                    <td class="number"><span class="pick-over">OVER</span></td>
+                    <td class="team-cell">08:10 PM ET</td>
+                </tr>
+
+                <tr>
+                    <td class="player-cell">Tre Jones</td>
+                    <td class="team-cell">CHI</td>
+                    <td class="team-cell">CLE</td>
+                    <td class="number">
+                        <div class="line-odds">
+                            <span class="line-value">9.5</span>
+                            <span class="odds-value">+101</span>
+                        </div>
+                    </td>
+                    <td class="number pred-value">12.9</td>
+                    <td class="number edge-medium">+3.4</td>
+                    <td class="number"><span class="pick-over">OVER</span></td>
+                    <td class="team-cell">08:10 PM ET</td>
+                </tr>
+
+                <tr>
+                    <td class="player-cell">Kevin Huerter</td>
+                    <td class="team-cell">CHI</td>
+                    <td class="team-cell">CLE</td>
+                    <td class="number">
+                        <div class="line-odds">
+                            <span class="line-value">9.5</span>
+                            <span class="odds-value">-101</span>
+                        </div>
+                    </td>
+                    <td class="number pred-value">11.4</td>
+                    <td class="number edge-positive">+1.9</td>
+                    <td class="number"><span class="pick-over">OVER</span></td>
+                    <td class="team-cell">08:10 PM ET</td>
+                </tr>
+
+                <tr>
+                    <td class="player-cell">Coby White</td>
+                    <td class="team-cell">CHI</td>
+                    <td class="team-cell">CLE</td>
+                    <td class="number">
+                        <div class="line-odds">
+                            <span class="line-value">21.5</span>
+                            <span class="odds-value">-106</span>
+                        </div>
+                    </td>
+                    <td class="number pred-value">14.2</td>
+                    <td class="number edge-high">+7.3</td>
+                    <td class="number"><span class="pick-under">UNDER</span></td>
+                    <td class="team-cell">08:10 PM ET</td>
+                </tr>
+
+                <tr>
+                    <td class="player-cell">Josh Giddey</td>
+                    <td class="team-cell">CHI</td>
+                    <td class="team-cell">CLE</td>
+                    <td class="number">
+                        <div class="line-odds">
+                            <span class="line-value">18.5</span>
+                            <span class="odds-value">-107</span>
+                        </div>
+                    </td>
+                    <td class="number pred-value">14.0</td>
+                    <td class="number edge-medium">+4.5</td>
+                    <td class="number"><span class="pick-under">UNDER</span></td>
+                    <td class="team-cell">08:10 PM ET</td>
+                </tr>
+
+                <tr>
+                    <td class="player-cell">De'Andre Hunter</td>
+                    <td class="team-cell">CLE</td>
+                    <td class="team-cell">CHI</td>
+                    <td class="number">
+                        <div class="line-odds">
+                            <span class="line-value">14.5</span>
+                            <span class="odds-value">-107</span>
+                        </div>
+                    </td>
+                    <td class="number pred-value">12.0</td>
+                    <td class="number edge-positive">+2.5</td>
+                    <td class="number"><span class="pick-under">UNDER</span></td>
+                    <td class="team-cell">08:10 PM ET</td>
+                </tr>
+
+                <tr>
+                    <td class="player-cell">Isaac Okoro</td>
+                    <td class="team-cell">CHI</td>
+                    <td class="team-cell">CLE</td>
+                    <td class="number">
+                        <div class="line-odds">
+                            <span class="line-value">7.5</span>
+                            <span class="odds-value">-109</span>
+                        </div>
+                    </td>
+                    <td class="number pred-value">11.7</td>
+                    <td class="number edge-medium">+4.2</td>
+                    <td class="number"><span class="pick-over">OVER</span></td>
+                    <td class="team-cell">08:10 PM ET</td>
+                </tr>
+
+                <tr>
+                    <td class="player-cell">Santi Aldama</td>
+                    <td class="team-cell">MEM</td>
+                    <td class="team-cell">MIN</td>
+                    <td class="number">
+                        <div class="line-odds">
+                            <span class="line-value">15.5</span>
+                            <span class="odds-value">-113</span>
+                        </div>
+                    </td>
+                    <td class="number pred-value">11.7</td>
+                    <td class="number edge-medium">+3.8</td>
+                    <td class="number"><span class="pick-under">UNDER</span></td>
+                    <td class="team-cell">08:10 PM ET</td>
+                </tr>
+
+                <tr>
+                    <td class="player-cell">Darius Garland</td>
+                    <td class="team-cell">CLE</td>
+                    <td class="team-cell">CHI</td>
+                    <td class="number">
+                        <div class="line-odds">
+                            <span class="line-value">20.5</span>
+                            <span class="odds-value">-115</span>
+                        </div>
+                    </td>
+                    <td class="number pred-value">13.1</td>
+                    <td class="number edge-high">+7.4</td>
+                    <td class="number"><span class="pick-under">UNDER</span></td>
+                    <td class="team-cell">08:10 PM ET</td>
+                </tr>
+
+                <tr>
+                    <td class="player-cell">Ayo Dosunmu</td>
+                    <td class="team-cell">CHI</td>
+                    <td class="team-cell">CLE</td>
+                    <td class="number">
+                        <div class="line-odds">
+                            <span class="line-value">10.5</span>
+                            <span class="odds-value">-115</span>
+                        </div>
+                    </td>
+                    <td class="number pred-value">12.7</td>
+                    <td class="number edge-positive">+2.2</td>
+                    <td class="number"><span class="pick-over">OVER</span></td>
+                    <td class="team-cell">08:10 PM ET</td>
+                </tr>
+
+                <tr>
+                    <td class="player-cell">Cedric Coward</td>
+                    <td class="team-cell">MEM</td>
+                    <td class="team-cell">MIN</td>
+                    <td class="number">
+                        <div class="line-odds">
+                            <span class="line-value">15.5</span>
+                            <span class="odds-value">-118</span>
+                        </div>
+                    </td>
+                    <td class="number pred-value">10.3</td>
+                    <td class="number edge-high">+5.2</td>
+                    <td class="number"><span class="pick-under">UNDER</span></td>
+                    <td class="team-cell">08:10 PM ET</td>
+                </tr>
+
+                <tr>
+                    <td class="player-cell">Kentavious Caldwell-Pope</td>
+                    <td class="team-cell">MEM</td>
+                    <td class="team-cell">MIN</td>
+                    <td class="number">
+                        <div class="line-odds">
+                            <span class="line-value">8.5</span>
+                            <span class="odds-value">-121</span>
+                        </div>
+                    </td>
+                    <td class="number pred-value">10.7</td>
+                    <td class="number edge-positive">+2.2</td>
+                    <td class="number"><span class="pick-over">OVER</span></td>
+                    <td class="team-cell">08:10 PM ET</td>
+                </tr>
+
+                <tr>
+                    <td class="player-cell">Matas Buzelis</td>
+                    <td class="team-cell">CHI</td>
+                    <td class="team-cell">CLE</td>
+                    <td class="number">
+                        <div class="line-odds">
+                            <span class="line-value">11.5</span>
+                            <span class="odds-value">-125</span>
+                        </div>
+                    </td>
+                    <td class="number pred-value">11.7</td>
+                    <td class="number edge-positive">+0.2</td>
+                    <td class="number"><span class="pick-over">OVER</span></td>
+                    <td class="team-cell">08:10 PM ET</td>
+                </tr>
+
+                <tr>
+                    <td class="player-cell">Jock Landale</td>
+                    <td class="team-cell">MEM</td>
+                    <td class="team-cell">MIN</td>
+                    <td class="number">
+                        <div class="line-odds">
+                            <span class="line-value">10.5</span>
+                            <span class="odds-value">-127</span>
+                        </div>
+                    </td>
+                    <td class="number pred-value">11.9</td>
+                    <td class="number edge-positive">+1.4</td>
+                    <td class="number"><span class="pick-over">OVER</span></td>
+                    <td class="team-cell">08:10 PM ET</td>
+                </tr>
+
+                <tr>
+                    <td class="player-cell">Patrick Williams</td>
+                    <td class="team-cell">CHI</td>
+                    <td class="team-cell">CLE</td>
+                    <td class="number">
+                        <div class="line-odds">
+                            <span class="line-value">5.5</span>
+                            <span class="odds-value">-130</span>
+                        </div>
+                    </td>
+                    <td class="number pred-value">10.3</td>
+                    <td class="number edge-medium">+4.8</td>
+                    <td class="number"><span class="pick-over">OVER</span></td>
+                    <td class="team-cell">08:10 PM ET</td>
+                </tr>
+
+                <tr>
+                    <td class="player-cell">Jaylon Tyson</td>
+                    <td class="team-cell">CLE</td>
+                    <td class="team-cell">CHI</td>
+                    <td class="number">
+                        <div class="line-odds">
+                            <span class="line-value">13.5</span>
+                            <span class="odds-value">-102</span>
+                        </div>
+                    </td>
+                    <td class="number pred-value">11.8</td>
+                    <td class="number edge-positive">+1.7</td>
+                    <td class="number"><span class="pick-over">OVER</span></td>
+                    <td class="team-cell">08:10 PM ET</td>
+                </tr>
+
+            </tbody>
+        </table>
+        
+        <div class="footer">
+            Generated by NBA Model • DraftKings Lines • For Entertainment Only
+        </div>
+    </div>
+</body>
+</html>
